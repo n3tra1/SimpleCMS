@@ -9,7 +9,7 @@ requests==2.27.1
 pytest-env==0.6.2
 bcrypt==3.2.2
 tortoise-orm==0.18.1
-aerich==0.6.3
+aerich==0.6.2
 fastapi-jwt==0.1.8
 asyncpg==0.25.0
 pytest-asyncio==0.18.3
