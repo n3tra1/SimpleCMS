@@ -17,7 +17,7 @@ def create_app() -> FastAPI:
         docs_url=os.getenv("SWAGGER_PATH"),
         redoc_url=os.getenv("REDOC_PATH"),
         openapi_url=os.getenv("OPENAPI_PATH"),
-        title=f"SimpleCMS",
+        title="SimpleCMS",
         version="0.1")
     application.include_router(auth.router, prefix="/auth", tags=["auth"])
     application.include_router(article.router,

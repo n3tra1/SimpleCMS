@@ -54,4 +54,3 @@ async def delete(author_id: uuid.UUID, article_id: uuid.UUID) -> bool:
     """Delete an article via article_id"""
     return bool(await Article
                 .filter(author_id=author_id, id=article_id).delete())
-

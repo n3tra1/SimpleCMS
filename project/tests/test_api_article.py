@@ -95,7 +95,7 @@ def test_get(test_app_with_db):
     assert response.status_code == 201
     second_article_id = response.json()["id"]
 
-    response = test_app_with_db.get(f"/article",
+    response = test_app_with_db.get("/article",
                                     params={"sort_fields": "-createdAt"})
     assert response.status_code == 200
     r = response.json()
