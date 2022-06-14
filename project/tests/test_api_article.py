@@ -11,8 +11,9 @@ def test_create_article(test_app_with_db):
     response = test_app_with_db.post("/auth/sign-up", json=TEST_CREDENTIALS)
     assert response.status_code == 201
     headers = make_auth_header(response.json()["accessToken"])
-    response = test_app_with_db.post("/article", json=TEST_ARTICLE,
-                                     headers=headers)
+    response = test_app_with_db.post(
+        "/article", json=TEST_ARTICLE, headers=headers
+    )
     assert response.status_code == 201
     r = response.json()
     assert uuid.UUID(r["id"])
@@ -28,16 +29,20 @@ def test_update_article(test_app_with_db):
     response = test_app_with_db.post("/auth/sign-in", json=TEST_CREDENTIALS)
     assert response.status_code == 200
     headers = make_auth_header(response.json()["accessToken"])
-    response = test_app_with_db.post("/article", json=TEST_ARTICLE,
-                                     headers=headers)
+    response = test_app_with_db.post(
+        "/article", json=TEST_ARTICLE, headers=headers
+    )
     assert response.status_code == 201
     article_id = response.json()["id"]
     created_at = response.json()["createdAt"]
     modified_at = datetime.datetime.fromisoformat(
-        response.json()["modifiedAt"])
+        response.json()["modifiedAt"]
+    )
     response = test_app_with_db.patch(
-        "/article", headers=headers,
-        json={"id": article_id, "title": "1", "body": "2"})
+        "/article",
+        headers=headers,
+        json={"id": article_id, "title": "1", "body": "2"},
+    )
     r = response.json()
     assert r["id"] == article_id
     assert r["title"] == "1"
@@ -50,15 +55,18 @@ def test_delete_article(test_app_with_db):
     response = test_app_with_db.post("/auth/sign-in", json=TEST_CREDENTIALS)
     assert response.status_code == 200
     headers = make_auth_header(response.json()["accessToken"])
-    response = test_app_with_db.post("/article", json=TEST_ARTICLE,
-                                     headers=headers)
+    response = test_app_with_db.post(
+        "/article", json=TEST_ARTICLE, headers=headers
+    )
     assert response.status_code == 201
     article_id = response.json()["id"]
     response = test_app_with_db.delete(
-        "/article", headers=headers, params={"article_id": article_id})
+        "/article", headers=headers, params={"article_id": article_id}
+    )
     assert response.status_code == 204
     response = test_app_with_db.delete(
-        "/article", headers=headers, params={"article_id": article_id})
+        "/article", headers=headers, params={"article_id": article_id}
+    )
     assert response.status_code == 403
 
 
@@ -66,8 +74,9 @@ def test_simple_get(test_app_with_db):
     response = test_app_with_db.post("/auth/sign-in", json=TEST_CREDENTIALS)
     assert response.status_code == 200
     headers = make_auth_header(response.json()["accessToken"])
-    response = test_app_with_db.post("/article", json=TEST_ARTICLE,
-                                     headers=headers)
+    response = test_app_with_db.post(
+        "/article", json=TEST_ARTICLE, headers=headers
+    )
     assert response.status_code == 201
     article_id = response.json()["id"]
     response = test_app_with_db.get(f"/article/{article_id}")
@@ -85,18 +94,21 @@ def test_get(test_app_with_db):
     assert response.status_code == 200
     headers = make_auth_header(response.json()["accessToken"])
 
-    response = test_app_with_db.post("/article", json=TEST_ARTICLE,
-                                     headers=headers)
+    response = test_app_with_db.post(
+        "/article", json=TEST_ARTICLE, headers=headers
+    )
     assert response.status_code == 201
     first_article_id = response.json()["id"]
 
-    response = test_app_with_db.post("/article", json=TEST_ARTICLE,
-                                     headers=headers)
+    response = test_app_with_db.post(
+        "/article", json=TEST_ARTICLE, headers=headers
+    )
     assert response.status_code == 201
     second_article_id = response.json()["id"]
 
-    response = test_app_with_db.get("/article",
-                                    params={"sort_fields": "-createdAt"})
+    response = test_app_with_db.get(
+        "/article", params={"sort_fields": "-createdAt"}
+    )
     assert response.status_code == 200
     r = response.json()
     assert r[0]["id"] == second_article_id

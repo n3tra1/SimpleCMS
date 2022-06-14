@@ -18,8 +18,9 @@ class User(MainModelMixin):
     def __init__(self, login: str, password: str):
         super().__init__()
         self.login = login
-        self.secret = bcrypt.hashpw(password.encode(),
-                                    bcrypt.gensalt()).decode()
+        self.secret = bcrypt.hashpw(
+            password.encode(), bcrypt.gensalt()
+        ).decode()
 
     def check_password(self, password: str) -> bool:
         return bcrypt.checkpw(password.encode(), self.secret.encode())
@@ -30,7 +31,9 @@ class User(MainModelMixin):
 
 
 CredentialsSchemaMixin = pydantic_model_creator(
-    User, include=("login", ), )
+    User,
+    include=("login",),
+)
 
 
 class CredentialsSchema(CredentialsSchemaMixin):

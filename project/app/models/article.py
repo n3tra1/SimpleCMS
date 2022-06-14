@@ -17,9 +17,11 @@ class Article(MainModelMixin):
 
 
 __ArticleCreateInSchema = pydantic_model_creator(
-    Article, name="ArticleInSchema", include=("title", "body"))
+    Article, name="ArticleInSchema", include=("title", "body")
+)
 __ArticleUpdateInSchema = pydantic_model_creator(
-    Article, name="ArticleUpdateInSchema", include=("id", "title", "body"))
+    Article, name="ArticleUpdateInSchema", include=("id", "title", "body")
+)
 __ArticleOutSchema = pydantic_model_creator(Article)
 
 

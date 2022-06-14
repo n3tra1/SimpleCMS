@@ -11,4 +11,5 @@ from fastapi_jwt import JwtAccessBearer
 access_security = JwtAccessBearer(
     os.getenv("JWT_SECURITY_KEY"),
     access_expires_delta=timedelta(seconds=int(os.getenv("JWT_TTL_SECONDS"))),
-    auto_error=True)
+    auto_error=True,
+)

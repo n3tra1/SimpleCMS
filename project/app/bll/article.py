@@ -11,10 +11,9 @@ async def make(author_id: uuid.UUID, title: str, body: str) -> Article:
     return await Article.create(author_id=author_id, title=title, body=body)
 
 
-async def update(author_id: uuid.UUID,
-                 article_id: uuid.UUID,
-                 title: str,
-                 body: str) -> Optional[Article]:
+async def update(
+    author_id: uuid.UUID, article_id: uuid.UUID, title: str, body: str
+) -> Optional[Article]:
     """Update an article via article_id"""
     row_count = await Article.filter(
         author_id=author_id, id=article_id
@@ -22,12 +21,13 @@ async def update(author_id: uuid.UUID,
     return await Article.filter(id=article_id).first() if row_count else None
 
 
-async def get(sort_fields: Iterable[str] = (),
-              author: Optional[str] = None,
-              limit: Optional[int] = None,
-              offset: Optional[int] = None,
-              article_id: Optional[uuid.UUID] = None,
-              ) -> List[dict]:
+async def get(
+    sort_fields: Iterable[str] = (),
+    author: Optional[str] = None,
+    limit: Optional[int] = None,
+    offset: Optional[int] = None,
+    article_id: Optional[uuid.UUID] = None,
+) -> List[dict]:
     """
     :param sort_fields: standard order_by
            https://tortoise-orm.readthedocs.io/en/latest/query.html?highlight=order_by#tortoise.queryset.QuerySet.order_by
@@ -45,12 +45,14 @@ async def get(sort_fields: Iterable[str] = (),
         q = q.offset(offset) if offset else q
     else:
         q = q.filter(id=article_id)
-    q = q.values("id", "body", "title", "created_at", "modified_at",
-                 "author__login")
+    q = q.values(
+        "id", "body", "title", "created_at", "modified_at", "author__login"
+    )
     return await q
 
 
 async def delete(author_id: uuid.UUID, article_id: uuid.UUID) -> bool:
     """Delete an article via article_id"""
-    return bool(await Article
-                .filter(author_id=author_id, id=article_id).delete())
+    return bool(
+        await Article.filter(author_id=author_id, id=article_id).delete()
+    )

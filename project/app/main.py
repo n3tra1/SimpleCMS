@@ -18,10 +18,12 @@ def create_app() -> FastAPI:
         redoc_url=os.getenv("REDOC_PATH"),
         openapi_url=os.getenv("OPENAPI_PATH"),
         title="SimpleCMS",
-        version="0.1")
+        version="0.1",
+    )
     application.include_router(auth.router, prefix="/auth", tags=["auth"])
-    application.include_router(article.router,
-                               prefix="/article", tags=["article"])
+    application.include_router(
+        article.router, prefix="/article", tags=["article"]
+    )
 
     return application
 
@@ -29,14 +31,13 @@ def create_app() -> FastAPI:
 app = create_app()
 
 
-@app.middleware('http')
+@app.middleware("http")
 async def x_process_time_middleware(request: Request, call_next):
     """X-Process-Time header shows how many seconds we spend
     to every request"""
     start_time = time.perf_counter()
     response = await call_next(request)
-    response.headers["X-Process-Time"] = str(
-        time.perf_counter()-start_time)
+    response.headers["X-Process-Time"] = str(time.perf_counter() - start_time)
     return response
 
 

@@ -12,8 +12,9 @@ from config import get_settings, Settings
 
 
 def get_settings_override():
-    return Settings(testing=1,
-                    database_url=os.environ.get("DATABASE_TEST_URL"))
+    return Settings(
+        testing=1, database_url=os.environ.get("DATABASE_TEST_URL")
+    )
 
 
 @pytest.fixture(scope="module")
@@ -25,8 +26,10 @@ def event_loop() -> Iterator[asyncio.AbstractEventLoop]:
 
 @pytest.fixture(scope="module", autouse=True)
 def initialize_tests(request):
-    initializer(["models.user", "models.article"],
-                db_url=os.environ.get("DATABASE_TEST_URL"))
+    initializer(
+        ["models.user", "models.article"],
+        db_url=os.environ.get("DATABASE_TEST_URL"),
+    )
     request.addfinalizer(finalizer)
 
 
