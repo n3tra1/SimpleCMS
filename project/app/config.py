@@ -1,11 +1,9 @@
 """Config module"""
 import logging
 import os
-
 from functools import lru_cache
 
-from pydantic import BaseSettings, AnyUrl
-
+from pydantic import AnyUrl, BaseSettings
 
 log = logging.getLogger("uvicorn")
 

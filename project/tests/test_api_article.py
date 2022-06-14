@@ -1,5 +1,5 @@
-import uuid
 import datetime
+import uuid
 
 from . import make_auth_header
 

@@ -2,6 +2,7 @@
 from typing import Optional
 
 import bcrypt
+
 from models.user import User
 
 FAKE_SECRET = "$2b$12$pk.vfGdaZKLAFnM.yRiG/.ml.F9WcUkj6wrL5b6dtFj4W5YAtJrWy"

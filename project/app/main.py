@@ -5,7 +5,7 @@ import time
 
 from fastapi import FastAPI, Request
 
-from api import auth, article
+from api import article, auth
 from db import init_db
 
 

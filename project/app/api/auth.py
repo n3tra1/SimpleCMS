@@ -2,8 +2,8 @@
 from contextlib import suppress
 
 from fastapi import APIRouter
-from fastapi_camelcase import CamelModel
 from fastapi.exceptions import HTTPException
+from fastapi_camelcase import CamelModel
 from pydantic import Field
 from tortoise.exceptions import IntegrityError
 

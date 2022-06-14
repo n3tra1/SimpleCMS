@@ -1,5 +1,5 @@
-import bll.user
 import bll.article
+import bll.user
 import models.article
 
 

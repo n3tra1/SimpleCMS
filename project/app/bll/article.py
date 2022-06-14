@@ -1,7 +1,7 @@
 """Article business logic layer"""
 import datetime
 import uuid
-from typing import Optional, Iterable, List
+from typing import Iterable, List, Optional
 
 from models.article import Article
 

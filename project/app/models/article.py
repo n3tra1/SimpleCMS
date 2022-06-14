@@ -3,8 +3,7 @@ from pydantic import Field
 from tortoise import fields
 from tortoise.contrib.pydantic import pydantic_model_creator
 
-from models import MainModelMixin
-from models import PydanticConfig
+from models import MainModelMixin, PydanticConfig
 
 
 class Article(MainModelMixin):

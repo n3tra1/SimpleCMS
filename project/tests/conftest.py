@@ -7,8 +7,8 @@ from starlette.testclient import TestClient
 from tortoise.contrib.fastapi import register_tortoise
 from tortoise.contrib.test import finalizer, initializer
 
-from main import create_app
 from config import get_settings, Settings
+from main import create_app
 
 
 def get_settings_override():

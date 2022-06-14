@@ -7,3 +7,4 @@ line-length = 79
 [tool.isort]
 profile = "black"
 multi_line_output = 3
+known_local_folder = ["app/"]
